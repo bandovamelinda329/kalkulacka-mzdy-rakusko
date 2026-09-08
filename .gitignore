@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+app.py=
+app_pred_*.py
+mzda_pred_*.py
+mzda_zaloha*.py
+program.py
+vypocty.txt
