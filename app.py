@@ -93,8 +93,14 @@ button {
 <body>
 <div class="box">
 
-<h1>🇦🇹 Kalkulačka mzdy</h1>
-
+<h1>🌍 Kalkulačka mzdy</h1>
+<div style="text-align:center;margin:15px 0;">
+    <button type="button" onclick="setLanguage('sk')">🇸🇰 SK</button>
+    <button type="button" onclick="setLanguage('de')">🇩🇪 DE</button>
+    <button type="button" onclick="setLanguage('en')">🇬🇧 EN</button>
+</div><p style="text-align:center;color:#64748b;font-size:15px;">
+  Mzdová kalkulačka pre Rakúsko 🇦🇹
+</p>
 <form method="POST">
 
 <label>Bežné hodiny</label>
@@ -140,8 +146,7 @@ button {
 
 {% if result %}
 <div class="result">
-<h2>Výsledok</h2>
-
+<h2 id="result-title">Výsledok</h2>
 <p>Základná mzda: <b>{{ result.zaklad }} €</b></p>
 <p>Nadčasy: <b>{{ result.mzda_nadcas }} €</b></p>
 <p>Nadčasový príplatok: <b>{{ result.nadcas_priplatok }} €</b></p>
@@ -160,12 +165,72 @@ button {
     <p>13. plat netto: <b>{{ result.netto_13_plat }} €</b></p>
     <p>14. plat netto: <b>{{ result.netto_14_plat }} €</b></p>
     <hr>
-    <h3>Ročný prehľad</h3>
-    <p>Ročné BRUTTO: <b>{{ result.rocne_brutto }} €</b></p>
-    <p>Ročné NETTO: <b>{{ result.rocne_netto }} €</b></p>
-<h2>NETTO: {{ result.netto }} €</h2>
+<h3 id="year-title">Ročný prehľad</h3>    <p>Ročné BRUTTO: <b>{{ result.rocne_brutto }} €</b></p>
+<h2 id="netto-title">NETTO: {{ result.netto }} €</h2><h2>NETTO: {{ result.netto }} €</h2>
 </div>
 {% endif %}
+
+
+<section style="margin-top:35px;text-align:left;line-height:1.7;">
+<h2>🇦🇹 Ako funguje výpočet mzdy v Rakúsku?</h2>
+
+<p>
+Táto kalkulačka mzdy je určená pre ľudí pracujúcich v Rakúsku.
+Pomáha orientačne vypočítať mesačnú mzdu podľa počtu pracovných hodín,
+hodinovej mzdy, nadčasov, nočných hodín, detí a vybraného spolkového
+štátu.
+</p>
+
+<h3>💶 Brutto a netto mzda</h3>
+<p>
+Brutto mzda je suma pred odpočítaním sociálnych odvodov a dane.
+Netto mzda je suma, ktorá po zohľadnení príslušných odvodov a dane
+zostáva zamestnancovi. Skutočná výplata sa môže líšiť podľa pracovnej
+zmluvy, kolektívnej zmluvy a osobnej situácie zamestnanca.
+</p>
+
+<h3>⏱️ Nadčasy</h3>
+<p>
+Pri práci nad rámec bežného pracovného času môže vzniknúť nárok na
+nadčasovú odmenu alebo príplatok. Výška príplatku závisí od pracovnej
+zmluvy a príslušnej kolektívnej alebo zákonnej úpravy.
+</p>
+
+<h3>🌙 Nočná práca</h3>
+<p>
+Za nočnú prácu môže podľa pracovných podmienok patriť osobitný príplatok.
+Jeho výška sa môže líšiť podľa odvetvia, pracovnej zmluvy a kolektívnej
+zmluvy.
+</p>
+
+<h3>👨‍👩‍👧 Deti a Familienbonus</h3>
+<p>
+Pri zamestnancoch s deťmi môžu mať rodinné daňové zvýhodnenia vplyv na
+výslednú daňovú záťaž. Kalkulačka preto umožňuje zadať počet detí.
+Konkrétny nárok však závisí od individuálnej situácie.
+</p>
+
+<h3>🏠 Spolková krajina</h3>
+<p>
+Kalkulačka umožňuje vybrať spolkovú krajinu, napríklad Wien,
+Niederösterreich, Burgenland alebo Steiermark. Niektoré pracovné
+podmienky a výpočty môžu závisieť od odvetvia a pracovných pravidiel.
+</p>
+
+<h3>❓ Na čo kalkulačka slúži?</h3>
+<p>
+Výsledok je orientačný a môže slúžiť ako pomôcka pri porovnávaní
+pracovných ponúk alebo pri plánovaní mesačného príjmu. Nenahrádza
+oficiálnu výplatnú pásku ani individuálny výpočet zamestnávateľa.
+</p>
+
+<h3>📌 Dôležité upozornenie</h3>
+<p>
+Výpočet je informatívny. Skutočná mzda môže byť odlišná podľa pracovnej
+zmluvy, kolektívnej zmluvy, sociálnych odvodov, dane, daňových
+zvýhodnení, príplatkov a ďalších individuálnych podmienok.
+</p>
+</section>
 
 <div class="warning">
 ⚠️ Ide o orientačný výpočet. Skutočná mzda závisí od pracovnej zmluvy,
@@ -175,7 +240,130 @@ odvodov, daní a individuálnych podmienok.
 </div>
 </body>
 </html>
-"""
+<script>
+function setLanguage(lang) {
+
+    const translations = {
+        sk: {
+            title: "🌍 Kalkulačka mzdy",
+            subtitle: "Mzdová kalkulačka pre Rakúsko 🇦🇹",
+            hours: "Bežné hodiny",
+            wage: "Mzda €/hodina",
+            overtime: "Nadčasy",
+            overtimePercent: "Nadčasový príplatok %",
+            night: "Nočné hodiny",
+            nightPercent: "Nočný príplatok %",
+            children: "Počet detí",
+            state: "Bundesland",
+            bonus: "13. a 14. plat",
+            calculate: "🧮 Vypočítať mzdu"
+resultTitle: "Výsledok",
+base: "Základná mzda:",
+overtimeResult: "Nadčasy:",
+overtimeBonusResult: "Nadčasový príplatok:",
+nightBonusResult: "Nočný príplatok:",
+grossMonthly: "BRUTTO mesačne:",
+social: "Sociálne odvody:",
+taxBefore: "Daň pred bonusom:",
+familyBonusResult: "Familienbonus:",
+taxAfter: "Daň po bonuse:",
+salary13Gross: "13. plat brutto:",
+salary13_14Net: "13. a 14. plat spolu netto:",
+salary13Net: "13. plat netto:",
+salary14Net: "14. plat netto:",
+annualOverview: "Ročný prehľad",
+annualGross: "Ročné BRUTTO:",
+annualNet: "Ročné NETTO:",
+netResult: "NETTO:"
+        },
+        de: {
+            title: "🌍 Gehaltsrechner",
+            subtitle: "Gehaltsrechner für Österreich 🇦🇹",
+            hours: "Normale Arbeitsstunden",
+            wage: "Lohn €/Stunde",
+            overtime: "Überstunden",
+            overtimePercent: "Überstundenzuschlag %",
+            night: "Nachtstunden",
+            nightPercent: "Nachtzuschlag %",
+            children: "Anzahl der Kinder",
+            state: "Bundesland",
+            bonus: "13. und 14. Gehalt",
+            calculate: "🧮 Gehalt berechnen"
+resultTitle: "Ergebnis",
+base: "Grundgehalt:",
+overtimeResult: "Überstunden:",
+overtimeBonusResult: "Überstundenzuschlag:",
+nightBonusResult: "Nachtzuschlag:",
+grossMonthly: "Monatliches BRUTTO:",
+social: "Sozialversicherungsbeiträge:",
+taxBefore: "Steuer vor Bonus:",
+familyBonusResult: "Familienbonus:",
+taxAfter: "Steuer nach Bonus:",
+salary13Gross: "13. Gehalt brutto:",
+salary13_14Net: "13. und 14. Gehalt netto zusammen:",
+salary13Net: "13. Gehalt netto:",
+salary14Net: "14. Gehalt netto:",
+annualOverview: "Jahresübersicht",
+annualGross: "Jahres-BRUTTO:",
+annualNet: "Jahres-NETTO:",
+netResult: "NETTO:"        },
+        en: {
+            title: "🌍 Salary Calculator",
+            subtitle: "Salary calculator for Austria 🇦🇹",
+            hours: "Regular hours",
+            wage: "Wage €/hour",
+            overtime: "Overtime",
+            overtimePercent: "Overtime bonus %",
+            night: "Night hours",
+            nightPercent: "Night bonus %",
+            children: "Number of children",
+            state: "Federal state",
+            bonus: "13th and 14th salary",
+            calculate: "🧮 Calculate salary",
+resultTitle: "Result",
+base: "Base salary:",
+overtimeResult: "Overtime:",
+overtimeBonusResult: "Overtime bonus:",
+nightBonusResult: "Night bonus:",
+grossMonthly: "Monthly GROSS:",
+social: "Social contributions:",
+taxBefore: "Tax before bonus:",
+familyBonusResult: "Family bonus:",
+taxAfter: "Tax after bonus:",
+salary13Gross: "13th salary gross:",
+salary13_14Net: "13th and 14th salary net total:",
+salary13Net: "13th salary net:",
+salary14Net: "14th salary net:",
+annualOverview: "Annual overview",
+annualGross: "Annual GROSS:",
+annualNet: "Annual NET:",
+netResult: "NET:"
+        }
+    };
+
+    const t = translations[lang];
+
+    document.querySelector("h1").textContent = t.title;
+    document.querySelector("h1").nextElementSibling.nextElementSibling.textContent = t.subtitle;
+
+    const labels = document.querySelectorAll("label");
+
+    labels[0].textContent = t.hours;
+    labels[1].textContent = t.wage;
+    labels[2].textContent = t.overtime;
+    labels[3].textContent = t.overtimePercent;
+    labels[4].textContent = t.night;
+    labels[5].textContent = t.nightPercent;
+    labels[6].textContent = t.children;
+    labels[7].textContent = t.state;
+    labels[8].textContent = t.bonus;
+
+    document.querySelector("form button").textContent = t.calculate;
+document.getElementById("result-title").textContent = t.resultTitle;
+document.getElementById("year-title").textContent = t.annualOverview;
+document.getElementById("netto-title").textContent = t.netResult;
+}
+</script>"""
 
 def vypocitaj_dan(zaklad):
     if zaklad <= 13539:
